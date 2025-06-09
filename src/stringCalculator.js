@@ -5,10 +5,19 @@ function add(numbers) {
   let nums = numbers;
 
   if (numbers.startsWith("//")) {
-    const delimiterMatch = numbers.match(/^\/\/(.+)\n/);
-    if (delimiterMatch) {
-      delimiter = new RegExp(delimiterMatch[1]);
+    const multiDelims = numbers.match(/\/\/(\[.*\])\n/);
+    if (multiDelims) {
+      const allDelims = [...numbers.matchAll(/\[([^\]]+)\]/g)].map((m) => m[1]);
+      delimiter = new RegExp(
+        allDelims.map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")
+      );
       nums = numbers.split("\n")[1];
+    } else {
+      const singleDelim = numbers.match(/^\/\/(.)\n/);
+      if (singleDelim) {
+        delimiter = new RegExp(singleDelim[1]);
+        nums = numbers.split("\n")[1];
+      }
     }
   }
 
