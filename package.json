@@ -5,7 +5,8 @@
   "description": "TDD Kata - String Calculator",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest ",
+    "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint .",
     "format": "prettier --write ."

@@ -43,3 +43,4 @@ test('supports multiple long delimiters', () => {
 test('throws error for malformed input like 1,\\n2', () => {
   expect(() => add('1,\n2')).toThrow();
 });
+
